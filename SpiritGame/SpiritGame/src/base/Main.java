@@ -43,7 +43,7 @@ public class Main extends Application {
 		
 		root.getChildren().add(canvas);
 		
-		handler.setHandlers(scene); // chabges
+		handler.setHandlers(scene); // more changes
 		
 		primary_stage.setTitle("Blank");
 		primary_stage.setScene(scene);
