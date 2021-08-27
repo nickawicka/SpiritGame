@@ -112,7 +112,7 @@ public class Entity {
 
     private void applyDrag() {
         float movementDrag = current_thrust_vector.magnitude() < 0.5 ? 0.01f : 0.07f;
-        float rotationDrag = current_torque_force < 0.2f ? 0.05f : 0.1f;
+        float rotationDrag = current_torque_force < 0.2f ? 0.05f : 0.1f; // hey
 
         current_thrust_vector = new Point2D(
                 reduceTowardsZero((float) current_thrust_vector.getX(), movementDrag),
