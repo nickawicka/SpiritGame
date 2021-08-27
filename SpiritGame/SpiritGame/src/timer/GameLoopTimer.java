@@ -10,14 +10,14 @@ public abstract class GameLoopTimer extends AnimationTimer {
     long animation_start;
     DoubleProperty animation_duration = new SimpleDoubleProperty(0L);
 
-    long lastFrameTimeNanos;
+    long last_frame_time_nanos;
 
     boolean is_paused;
     boolean is_active;
 
-    boolean pauseScheduled;
-    boolean playScheduled;
-    boolean restartScheduled;
+    boolean pause_scheduled;
+    boolean play_scheduled;
+    boolean restart_scheduled;
 
     public boolean isPaused() {
         return is_paused;
@@ -33,13 +33,13 @@ public abstract class GameLoopTimer extends AnimationTimer {
 
     public void pause() {
         if (!is_paused) {
-            pauseScheduled = true;
+            pause_scheduled = true;
         }
     }
 
     public void play() {
         if (is_paused) {
-            playScheduled = true;
+            play_scheduled = true;
         }
     }
 
@@ -47,7 +47,7 @@ public abstract class GameLoopTimer extends AnimationTimer {
     public void start() {
         super.start();
         is_active = true;
-        restartScheduled = true;
+        restart_scheduled = true;
     }
 
     @Override
@@ -56,40 +56,40 @@ public abstract class GameLoopTimer extends AnimationTimer {
         pause_start = 0;
         is_paused = false;
         is_active = false;
-        pauseScheduled = false;
-        playScheduled = false;
+        pause_scheduled = false;
+        play_scheduled = false;
         animation_duration.set(0);
     }
 
     @Override
     public void handle(long now) {
-        if (pauseScheduled) {
+        if (pause_scheduled) {
             pause_start = now;
             is_paused = true;
-            pauseScheduled = false;
+            pause_scheduled = false;
         }
 
-        if (playScheduled) {
+        if (play_scheduled) {
             animation_start += (now - pause_start);
             is_paused = false;
-            playScheduled = false;
+            play_scheduled = false;
         }
 
-        if (restartScheduled) {
+        if (restart_scheduled) {
         	is_paused = false;
             animation_start = now;
-            restartScheduled = false;
+            restart_scheduled = false;
         }
 
         if (!is_paused) {
-            long animDuration = now - animation_start;
-            animation_duration.set(animDuration / 1e9);
+            long anim_dur = now - animation_start;
+            animation_duration.set(anim_dur / 1e9);
 
-            float secondsSinceLastFrame = (float) ((now - lastFrameTimeNanos) / 1e9);
-            lastFrameTimeNanos = now;
-            tick(secondsSinceLastFrame);
+            float seconds_since_last_frame = (float) ((now - last_frame_time_nanos) / 1e9);
+            last_frame_time_nanos = now;
+            tick(seconds_since_last_frame);
         }
     }
 
-    public abstract void tick(float secondsSinceLastFrame);
+    public abstract void tick(float seconds_since_last_frame);
 }
