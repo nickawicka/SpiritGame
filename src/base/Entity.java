@@ -91,8 +91,8 @@ public class Entity {
     }
 
     private void addThrust(double scalar, double angle) {
-        Point2D thrustVector = calculateNewThrustVector(scalar, Math.toRadians(-angle));
-        current_thrust_vector = current_thrust_vector.add(thrustVector);
+        Point2D thrust_vector = calculateNewThrustVector(scalar, Math.toRadians(-angle));
+        current_thrust_vector = current_thrust_vector.add(thrust_vector);
         current_thrust_vector = clampToMaxSpeed(current_thrust_vector);
     }
 
@@ -102,23 +102,23 @@ public class Entity {
                 (float) (Math.cos(angle) * scalar));
     }
 
-    private Point2D clampToMaxSpeed(Point2D thrustVector) {
-        if (thrustVector.magnitude() > MAX_SPEED) {
-            return current_thrust_vector = thrustVector.normalize().multiply(MAX_SPEED);
+    private Point2D clampToMaxSpeed(Point2D thrust_vector) {
+        if (thrust_vector.magnitude() > MAX_SPEED) {
+            return current_thrust_vector = thrust_vector.normalize().multiply(MAX_SPEED);
         } else {
-            return current_thrust_vector = thrustVector;
+            return current_thrust_vector = thrust_vector;
         }
     }
 
     private void applyDrag() {
-        float movementDrag = current_thrust_vector.magnitude() < 0.5 ? 0.01f : 0.07f;
-        float rotationDrag = current_torque_force < 0.2f ? 0.05f : 0.1f;
+        float movement_drag = current_thrust_vector.magnitude() < 0.5 ? 0.01f : 0.07f;
+        float rotation_drag = current_torque_force < 0.2f ? 0.05f : 0.1f;
 
         current_thrust_vector = new Point2D(
-                reduceTowardsZero((float) current_thrust_vector.getX(), movementDrag),
-                reduceTowardsZero((float) current_thrust_vector.getY(), movementDrag));
+                reduceTowardsZero((float) current_thrust_vector.getX(), movement_drag),
+                reduceTowardsZero((float) current_thrust_vector.getY(), movement_drag));
 
-        current_torque_force = reduceTowardsZero(current_torque_force, rotationDrag);
+        current_torque_force = reduceTowardsZero(current_torque_force, rotation_drag);
     }
 
     private float reduceTowardsZero(float value, float modifier) {
