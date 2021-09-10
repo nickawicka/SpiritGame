@@ -23,17 +23,18 @@ public class Main extends Application {
 	
 	@Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainView.fxml"));
-        Scene scene = new Scene(root);
+        //Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainView.fxml"));
+        Group root = new Group();
+        Scene game_scene = new Scene(root);
 
-        KeyPolling.getInstance().pollScene(scene);
+        KeyPolling.getInstance().pollScene(game_scene);
 
-        primaryStage.setScene(scene);
+        primaryStage.setScene(game_scene);
         primaryStage.setTitle("Spirit Game");
 
         //primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/EdenCodingIcon.png")));
 
-        primaryStage.setScene(scene);
+        primaryStage.setScene(game_scene);
         primaryStage.show();
     }
 	/*

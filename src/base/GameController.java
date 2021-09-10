@@ -21,7 +21,7 @@ public class GameController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        initialiseCanvas();
+        initializeCanvas();
 
         player.setDrawPosition(350, 200);
         player.setScale(0.5f);
@@ -43,7 +43,7 @@ public class GameController implements Initializable {
         timer.start();
     }
 
-    private void initialiseCanvas() {
+    private void initializeCanvas() {
         gameCanvas.widthProperty().bind(gameAnchor.widthProperty());
         gameCanvas.heightProperty().bind(gameAnchor.heightProperty());
     }
