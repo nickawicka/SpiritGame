@@ -1,4 +1,4 @@
-package timer;
+package base;
 
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.DoubleProperty;

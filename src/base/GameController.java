@@ -5,7 +5,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
-import timer.GameLoopTimer;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,6 +18,7 @@ public class GameController implements Initializable {
     private Entity player = new Entity(new Image(getClass().getResourceAsStream("/img/ship.png")));
 
     @Override
+   // public void initialize(URL location, ResourceBundle resources) {
     public void initialize(URL location, ResourceBundle resources) {
 
         initializeCanvas();
@@ -28,7 +28,7 @@ public class GameController implements Initializable {
 
         Renderer renderer = new Renderer(this.gameCanvas);
         renderer.addEntity(player);
-        renderer.setBackground(new Image(getClass().getResourceAsStream("/img/SpaceBackground.jpg")));
+        //renderer.setBackground(new Image(getClass().getResourceAsStream("/img/SpaceBackground.jpg")));
 
         GameLoopTimer timer = new GameLoopTimer() {
             @Override
